@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HANDMADE GIFTS</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="Googlebot" content="noindex">
+    <meta name="description" content="HANDMADE GIFTS ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    
+    <style>
+
+        
+        .hintT-top {
+            position: relative;
+        }
+
+        .hintT-top:before {
+            content: attr(data-hint);
+            position: absolute;
+            top: -30px; 
+            left: 80%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #fff;
+            padding: 3px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+            font-size: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 10;
+        }
+
+        .hintT-top:hover:before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+    
+        .popup {
+            position: relative;
+            margin: 0 auto;
+            max-width: 80%;
+            padding: 15px;
+            background-color: #cb8a8a;
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup.hidden {
+            display: none;
+        }
+
+        .popup button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #popup-message {
+            margin-top: 10px;
+        }
+    </style>
+    
+    
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-top-area bg-dark">
+            <div class="container-full px-50">
+                <div class="row">
+                    <div class="col py-2 py-lg-0 d-flex flex-column align-items-center flex-md-row justify-content-center justify-content-md-between">
+                        <div class="header-top-area-left-side d-flex">
+                            <div class="social-share d-flex gap-2 header-top-area-left-side-item">
+                                <a class="social-share-link facebook" href="https://www.facebook.com/login.php"  aria-label="facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="social-share-link twitter" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"  aria-label="twitter">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a class="social-share-link instagram" href="https://www.instagram.com/accounts/login/"  aria-label="instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                
+                            </div>
+
+                            <div class="contact-number header-top-area-left-side-item">
+                                <a href="tel:+1234567890">
+                                    <i class="icon-rt-call-outline"></i>
+                                    <span>+91 9745865033</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="header-top-area-right-side d-flex">
+                            <div class="header-top-area-right-side-item">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'logout' %}" class="icon-rt-user" ><i class="icon-rt-user"></i>Logout</a>
+
+                                {% else %}
+                                <a href="#login-form-popup-actiove" data-bs-toggle="modal">
+                                    <i class="icon-rt-user"></i>
+                                    Sign in
+                                </a>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hader-bottom-area sticky-header">
+            <div class="container-full px-50">
+                <div class="row align-items-center">
+                    <div class="col-4 col-lg-5">
+                        {% include 'nav.html' %}
+
+                        <button class="header-action-item d-md-none" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        <div class="logo text-center">
+                            <a href="{% url 'index' %}" style="height: 50px; width: 100px; color: #d98f5f;">
+                        
+                                <span style="font-weight: bold; font-style: italic; font-family: cursive;">HANDMADE GIFTS</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-5">
+                        <div class="header-action d-flex justify-content-end">
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Admin Dashboard">
+                                            <a href="{% url 'admin' %}" class="header-action-item">
+                                                <i class="fa-solid fa-crown" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% elif user.type == 'seller' %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Sell with Us">
+                                            <a href="{% url 'seller_dashboard' %}" class="header-action-item">
+                                                <i class="fa-solid fa-money-bill-wave" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            <button class="header-action-item d-none d-md-block" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <a href="{% url 'wishlist' %}" class="header-action-item" title="Wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="header-action-item-count">({{ wishlist_count }})</span>
+                            </a>
+                            <a href="{% url 'cart' %}" class="header-action-item" title="Cart Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+
+
+
+    <main>
+        <section class="breadcrumb-section">
+            <div class="breadcrumb-image">
+                <img src="{% static 'images/banners/breadcrumb_bag.jpg' %}" alt="breadcrumb bg" width="1920" height="292">
+            </div>
+            <div class="breadcrumb-content text-center">
+                <h2 class="mb-2">Wishlist</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+
+                        <li class="breadcrumb-item"><a href="{% url 'products_by_category' 'all' %}">shop</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">wishlist</li>
+                    </ol>
+                </nav>
+            </div>
+            
+            <div id="popup-message" class="popup hidden">
+                <span id="popup-message-text"></span>
+                <button id="popup-close-btn" style="background:none; border:none; font-size:18px; color:white;">&times;</button>
+            </div>
+
+        </section>
+        <section class="wishlist-section section-space-ptb border-bottom-1">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        {% if wishlist_products %}
+                            <form class="cart-form" action="#" enctype="multipart/form-data">
+                                <div class="table-responsive">
+                                    <table class="cart-wishlist-table table align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th class="remove"></th>
+                                                <th class="name" colspan="2">Product</th>
+                                                <th class="price">Price</th>
+                                                <th class="subtotal">STOCK STATUS</th>
+                                                <th class="quantity">Add To Cart</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for product in wishlist_products %}
+                                                <tr>
+                                                    <td class="remove">
+                                                        <a href="{% url 'remove_from_wishlist' product.id %}" class="remove-btn  hintT-top" data-hint="Remove" data-product-id="{{ product.id }}">×</a>
+                                                    </td>
+                                                    <td class="thumbnail">
+                                                        <a href="{% url 'product-details' product.id %}" target="_blank">
+                                                            <img src="{{ product.image_front.url }}" alt="{{ product.name }}" width="100" height="100" loading="lazy">
+                                                        </a>
+                                                    </td>
+                                                    <td class="name">
+                                                        <a href="{% url 'product-details' product.id %}" target="_blank">{{ product.name }}</a>
+                                                    </td>
+                                                    <td class="price">
+                                                        <span>₹{{ product.price }}</span>
+                                                    </td>
+                                                    <td class="stock-status">
+                                                        <span>{% if product.stock > 0 %}In Stock{% else %}Out of Stock{% endif %}</span>
+                                                    </td>
+                                                    <td class="quantity">
+                                                        {% if product.stock > 0 %}
+                                                            {% if user.is_authenticated %}
+                                                                {% if product.id in cart_items %}
+                                                                    <a href="{% url 'cart' %}" class="btn btn-primary btn-lg">View Cart</a>
+                                                                {% else %}
+                                                                    <a href="{% url 'cartwish' product.id %}" class="btn btn-primary btn-lg">Add to Cart</a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Add to Cart</a>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <button class="btn btn-primary btn-lg" disabled>Out of Stock</button>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="back-btn">
+                                    <a href="{% url 'products_by_category' 'all' %}" class="btn btn-dark">
+                                        <i class="fas fa-heart" style="color: red;"></i>&nbsp; Add more to Wishlist
+                                    </a>
+                                </div>
+                                
+                            </form>
+                        {% else %}
+                            <div class="text-center mt-4">
+                                <h3>Your wishlist is empty.</h3>
+                                <p>Explore our products and add items to your wishlist from the <a href="{% url 'products_by_category' 'all' %}" style="padding: 0.25rem 0.5rem; font-size: 0.875rem;" class="btn btn-dark" >Shop</a> page!</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            
+        </section>
+        
+    </main>
+
+
+    <div class="offcanvas offcanvas-top offcanvas-search-area" tabindex="-1" id="offcanvas-search">
+        <div class="offcanvas-search-wrap">
+            <div class="offcanvas-search-header">
+                <div class="offcanvas-search-title">
+                    <span class="visually-hidden">Search</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-search-body">
+                <div class="offcanvas-search-box">
+                    <form action="{% url 'products_by_category' 'all' %}" method="GET" class="offcanvas-search-form">
+                        <input type="text" name="q" placeholder="Search..." class="offcanvas-search-input" required>
+                        <button type="submit" class="offcanvas-search-submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="offcanvas-search-content">
+                        <div class="offcanvas-search-keywords-list">
+                            <p class="offcanvas-search-key-title">Popular searches :</p>
+                            <ul class="offcanvas-search-popular d-flex gap-1">
+                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="btn btn-xs btn-gray btn-rounde-2">accessories</a></li>
+                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="btn btn-xs btn-gray btn-rounde-2">clothing</a></li>
+                                <li><a href="{% url 'products_by_category' 'arts' %}" class="btn btn-xs btn-gray btn-rounde-2">arts</a></li>
+                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="btn btn-xs btn-gray btn-rounde-2">handicrafts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area" style="background-color: #fff; color: #333; text-align: center; padding: 20px;">
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="contact-us">
+                    <a href="{% url 'contact-us' %}" class="widget--menu-link" style="color: #333; font-size: 1.5em; text-decoration: none;">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% if messages %}
+            let messageText = "{% for message in messages %}{{ message }}{% endfor %}";
+            
+            let popup = document.getElementById('popup-message');
+            let popupText = document.getElementById('popup-message-text');
+            popupText.innerHTML = messageText;
+            popup.classList.remove('hidden'); 
+
+            document.getElementById('popup-close-btn').addEventListener('click', function() {
+                popup.classList.add('hidden');
+            });
+
+            setTimeout(function() {
+                popup.classList.add('hidden');
+            }, 3000);
+            {% endif %}
+        });
+    </script>
+
+    
+</body>
+
+
+
+</html>

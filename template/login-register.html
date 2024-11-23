@@ -1,0 +1,485 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HANDMADE GIFTS </title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="Googlebot" content="noindex">
+    <meta name="description" content="HANDMADE GIFTS">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script>
+        window.addEventListener('load', function() {
+            const alertElements = document.querySelectorAll('.alert');
+            alertElements.forEach(element => {
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 5000); 
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        
+        <div class="hader-bottom-area sticky-header">
+            <div class="container-full px-50">
+                <div class="row align-items-center">
+                    <div class="col-4 col-lg-5">
+                        {% include 'nav.html' %}
+
+                        <button class="header-action-item d-md-none" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        <div class="logo text-center">
+                            <a href="{% url 'index' %}" style="height: 50px; width: 100px; color: #d98f5f;">
+                        
+                                <span style="font-weight: bold; font-style: italic; font-family: cursive;">HANDMADE GIFTS</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-5">
+                        <div class="header-action d-flex justify-content-end">
+                            
+                            <button class="header-action-item d-none d-md-block" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <a href="{% url 'wishlist' %}" class="header-action-item" title="Wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="header-action-item-count"></span>
+                            </a>
+                            <a href="{% url 'cart' %}" class="header-action-item" title="Cart Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+        <section class="breadcrumb-section">
+            <div class="breadcrumb-image">
+                <img src="{% static 'images/banners/breadcrumb_bag.jpg' %}" alt="breadcrumb bg" width="1920" height="292">
+            </div>
+            <div class="breadcrumb-content text-center">
+                <h2 class="mb-2">Login & Register</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Login & Register</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="my-login-page section-space-ptb border-bottom-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 mx-auto">
+                        <div class="sign-in-modal-body px-3 pb-5">
+                            <div class="modal-box-wrapper">
+                                <ul class="nav sign-in-tablist" role="tablist">
+                                    <li class="sign-in-tab--item nav-item" role="presentation">
+                                        <a class="sign-in-tab--link active" data-bs-toggle="tab" href="#tab_list_06" role="tab" aria-selected="true">Login</a>
+                                    </li>
+                                    <li class="sign-in-tab--item nav-item" role="presentation">
+                                        <a class="sign-in-tab--link" data-bs-toggle="tab" href="#tab_list_07" role="tab" aria-selected="false" tabindex="-1">Our Register</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade" id="tab_list_07" role="tabpanel">
+                                        <form method="post" enctype="multipart/form-data" id="registration-form1" action="{% url 'register' %}" class="account-form-box mx-auto" onsubmit="return validateRegistrationForm()">
+                                            {% csrf_token %}
+                                            <div class="alert alert-danger" role="alert" {% if not messages %}style="display: none;"{% endif %}>
+                                                {% for message in messages %}
+                                                    <p>{{ message.message }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="register-name">Username</label>
+                                                <input class="single-input-fild" type="text" name="username" id="register-name" required>
+                                                <div id="username-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="register-email">Email address</label>
+                                                <input class="single-input-fild" type="email" name="email" id="register-email" required>
+                                                <div id="email-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="register-password">Password</label>
+                                                <input class="single-input-fild" type="password" name="password" id="register-password" required>
+                                                <div id="password-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="register-phone">Mobile Number</label>
+                                                <input class="single-input-fild" type="tel" name="phonenumber" id="register-phone">
+                                                <div id="phone-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="register-user-type">Login as</label>
+                                                <select class="single-input-fild" name="user_type" id="register-user-type">
+                                                    <option value="" disabled selected>Select...</option>
+                                                    <option value="user">User</option>
+                                                    <option value="seller">Seller</option>
+                                                </select>
+                                                <div id="user-type-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-gruop" id="id-proof-type-group" style="display: none;">
+                                                <label class="single-input-label" for="id-proof-type">ID Proof Type</label>
+                                                <select class="single-input-fild" name="id_proof_type" id="id-proof-type">
+                                                    <option value="" disabled selected>Select ID Proof </option>
+                                                    <option value="license">Driver's License</option>
+                                                    <option value="voterid">Voter ID</option>
+                                                    <option value="passport">Passport</option>
+                                                    <option value="aadhaar">Aadhaar</option>
+                                                </select>
+                                                <div id="id-proof-type-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="single-input-group" id="id-proof-image-group" style="display: none;">
+                                                <label class="single-input-label" for="id-proof-image">Upload ID Proof Image</label>
+                                                <input class="single-input-field" type="file" name="id_proof_image" id="id-proof-image" accept="image/*">
+                                                <div id="id-proof-image-error" class="text-danger"></div>
+                                            </div>
+                                        
+                                            <div class="button-box mt-4">
+                                                <button type="submit" class="btn btn-full btn-md btn-primary">Register</button>
+                                            </div>
+                                        </form>
+                                        
+                                        
+                                        
+                                        
+                                    </div>
+                                    
+                                    <div class="tab-pane fade show active" id="tab_list_06" role="tabpanel">
+                                        <form method="post" id="registration-form" action="{% url 'login' %}" class="account-form-box mx-auto">
+                                            {% csrf_token %}
+                                            <div class="alert alert-danger" role="alert" {% if not messages %}style="display: none;"{% endif %}>
+                                                {% for message in messages %}
+                                                    <p>{{ message.message }}</p>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="login-username">Username</label>
+                                                <input class="single-input-fild" type="text" name="username" id="login-username">
+                                            </div>
+                                            <div class="single-input-gruop">
+                                                <label class="single-input-label" for="login-password">Password</label>
+                                                <input class="single-input-fild" type="password" name="password" id="login-password">
+                                            </div>
+                                            
+                                            <div class="button-box">
+                                                <button type="submit" class="btn btn-full btn-md btn-primary mt-2">Log in</button>
+                                            </div>
+                                        </form>
+                                        <div class="checkbox-wrap mt-3 mb-4 d-flex align-items-center justify-content-between fs-16">
+                                            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#forgotPasswordOffcanvas">Lost your password?</a>
+                                        </div>
+                                        
+                                        <div class="offcanvas offcanvas-end" tabindex="-1" id="forgotPasswordOffcanvas" aria-labelledby="forgotPasswordOffcanvasLabel">
+                                            <div class="offcanvas-header">
+                                                <h5 id="forgotPasswordOffcanvasLabel">Forgot Password</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                            </div>
+                                            <div class="offcanvas-body">
+                                                
+                                                <div id="message-container"></div>
+                                        
+                                                <form id="forgot-password-form" method="post" action="{% url 'forgot' %}">
+                                                    {% csrf_token %}
+                                                    <div class="mb-3">
+                                                        <label for="email" class="form-label">Enter your registered email</label>
+                                                        <input type="email" class="form-control" id="email" name="email" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Send Email</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div id="error-messages"></div>
+                                    </div>
+                                </div>
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <div class="offcanvas offcanvas-top offcanvas-search-area" tabindex="-1" id="offcanvas-search">
+        <div class="offcanvas-search-wrap">
+            <div class="offcanvas-search-header">
+                <div class="offcanvas-search-title">
+                    <span class="visually-hidden">Search</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-search-body">
+                <div class="offcanvas-search-box">
+                    <form action="{% url 'products_by_category' 'all' %}" method="GET" class="offcanvas-search-form">
+                        <input type="text" name="q" placeholder="Search..." class="offcanvas-search-input" required>
+                        <button type="submit" class="offcanvas-search-submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="offcanvas-search-content">
+                        <div class="offcanvas-search-keywords-list">
+                            <p class="offcanvas-search-key-title">Popular searches :</p>
+                            <ul class="offcanvas-search-popular d-flex gap-1">
+                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="btn btn-xs btn-gray btn-rounde-2">accessories</a></li>
+                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="btn btn-xs btn-gray btn-rounde-2">clothing</a></li>
+                                <li><a href="{% url 'products_by_category' 'arts' %}" class="btn btn-xs btn-gray btn-rounde-2">arts</a></li>
+                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="btn btn-xs btn-gray btn-rounde-2">handicrafts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area" style="background-color: #fff; color: #333; text-align: center; padding: 20px;">
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="contact-us">
+                    <a href="{% url 'contact-us' %}" class="widget--menu-link" style="color: #333; font-size: 1.5em; text-decoration: none;">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+    <script>
+        function validateRegistrationForm() {
+            const username = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const phoneNumber = document.getElementById('register-phone').value;
+            const userType = document.getElementById('register-user-type').value;
+            const idProofType = document.getElementById('id-proof-type').value;
+            const idProofImage = document.getElementById('id-proof-image').files[0];
+    
+            document.getElementById('username-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('phone-error').textContent = '';
+            document.getElementById('id-proof-type-error').textContent = '';
+            document.getElementById('id-proof-image-error').textContent = '';
+    
+            let isValid = true;
+    
+            if (!username) {
+                document.getElementById('username-error').textContent = 'Please enter a username.';
+                isValid = false;
+            }
+    
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+    
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('password-error').textContent = 'Password must be at least 8 characters and include a lowercase letter, uppercase letter, number, and special symbol.';
+                isValid = false;
+            }
+    
+            const phoneRegex = /^\d{10}$/;
+            if (phoneNumber && !phoneRegex.test(phoneNumber)) {
+                document.getElementById('phone-error').textContent = 'Please enter a valid phone number.';
+                isValid = false;
+            }
+    
+            if (userType === 'seller') {
+                if (!idProofType) {
+                    document.getElementById('id-proof-type-error').textContent = 'Please select an ID proof type.';
+                    isValid = false;
+                }
+                if (!idProofImage) {
+                    document.getElementById('id-proof-image-error').textContent = 'Please upload an ID proof image.';
+                    isValid = false;
+                }
+            }
+    
+            return isValid;
+        }
+    
+        document.getElementById('register-user-type').addEventListener('change', function () {
+            const userType = this.value;
+            const idProofTypeGroup = document.getElementById('id-proof-type-group');
+            const idProofImageGroup = document.getElementById('id-proof-image-group');
+    
+            if (userType === 'seller') {
+                idProofTypeGroup.style.display = 'block';
+                idProofImageGroup.style.display = 'block';
+            } else {
+                idProofTypeGroup.style.display = 'none';
+                idProofImageGroup.style.display = 'none';
+            }
+        });
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            const userTypeSelect = document.getElementById('register-user-type');
+            const idProofTypeGroup = document.getElementById('id-proof-type-group');
+            const idProofImageGroup = document.getElementById('id-proof-image-group');
+            
+            if (userTypeSelect.value !== 'seller') {
+                idProofTypeGroup.style.display = 'none';
+                idProofImageGroup.style.display = 'none';
+            }
+        });
+    
+        document.getElementById('register-email').addEventListener('input', function () {
+            const email = this.value;
+            const emailError = document.getElementById('email-error');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            emailError.textContent = !emailRegex.test(email) ? 'Please enter a valid email address.' : '';
+        });
+    
+        document.getElementById('register-password').addEventListener('input', function () {
+            const password = this.value;
+            const passwordError = document.getElementById('password-error');
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            passwordError.textContent = !passwordRegex.test(password) 
+                ? 'Password must be at least 8 characters and include a lowercase letter, uppercase letter, number, and special symbol.' 
+                : '';
+        });
+    
+        document.getElementById('register-phone').addEventListener('input', function () {
+            const phoneNumber = this.value;
+            const phoneError = document.getElementById('phone-error');
+            const phoneRegex = /^\d{10}$/;
+            phoneError.textContent = phoneNumber && !phoneRegex.test(phoneNumber)
+                ? 'Please enter a valid phone number.'
+                : '';
+        });
+    
+        document.getElementById('id-proof-type').addEventListener('change', function () {
+            const idProofType = this.value;
+            const idProofTypeError = document.getElementById('id-proof-type-error');
+            idProofTypeError.textContent = !idProofType ? 'Please select an ID proof type.' : '';
+        });
+    
+        document.getElementById('id-proof-image').addEventListener('change', function () {
+            const idProofImage = this.files[0];
+            const idProofImageError = document.getElementById('id-proof-image-error');
+            idProofImageError.textContent = !idProofImage ? 'Please upload an ID proof image.' : '';
+        });
+    
+        document.getElementById('registration-form1').onsubmit = function (event) {
+            if (!validateRegistrationForm()) {
+                event.preventDefault(); 
+            }
+        };
+    </script>
+
+   <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('forgot-password-form');
+            const messageContainer = document.getElementById('message-container');
+            const emailInput = document.getElementById('email');  
+            
+            function clearEmailInput() {
+                emailInput.value = ''; 
+            }
+
+            function closeMessage() {
+                messageContainer.innerHTML = ''; 
+            }
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                
+                const formData = new FormData(form); 
+                const url = form.action;
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    let messageHtml = '';
+                    
+                    if (data.success) {
+                        messageHtml = `
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${data.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeMessage()"></button>
+                            </div>`;
+                        
+                        clearEmailInput();
+                    } else {
+                        messageHtml = `
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${data.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeMessage()"></button>
+                            </div>`;
+                    }
+
+                    messageContainer.innerHTML = messageHtml;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    messageContainer.innerHTML = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Network error. Please try again later.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeMessage()"></button>
+                        </div>`;
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

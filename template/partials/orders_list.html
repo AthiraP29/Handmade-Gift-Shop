@@ -1,0 +1,49 @@
+<h2 class="mb-4">Your Orders</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Order Items</th>
+                <th>View Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        <p><strong>Date:</strong> {{ order.order_date|date:"d-m-Y" }}</p>
+                        <p><strong>Time:</strong> {{ order.order_date|date:"h:i A" }}</p>
+                    </td>
+                    <td>₹ {{ order.total_amount|floatformat:0 }}</td>
+                    <td>
+                        <ul>
+                            {% for item in order.order_items.all %}
+                                <li>
+                                    <strong>Product:</strong> {{ item.product.name }}<br>
+                                    <strong>Seller:</strong> {{ item.product.seller.username }}<br>
+                                    <strong>Delivery Status:</strong>
+                                    {% if item.status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                    {% elif item.status == 'shipped' %}
+                                        <span class="badge bg-primary">Shipped</span>
+                                    {% elif item.status == 'delivered' %}
+                                        <span class="badge bg-success">Delivered</span>
+                                    {% elif item.status == 'canceled' %}
+                                        <span class="badge bg-danger">Canceled</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Unknown</span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="{% url 'order_details' order.id %}" class="btn btn-primary btn-sm">View Details</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

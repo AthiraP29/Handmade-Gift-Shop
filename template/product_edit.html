@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="{% static 'acss/style.css' %}" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Product</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" required>{{ product.description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category" required>
+                    <option value="accessories" {% if product.category == 'accessories' %}selected{% endif %}>Accessories</option>
+                    <option value="clothing" {% if product.category == 'clothing' %}selected{% endif %}>Clothing</option>
+                    <option value="arts" {% if product.category == 'arts' %}selected{% endif %}>Arts</option>
+                    <option value="handicrafts" {% if product.category == 'handicrafts' %}selected{% endif %}>Handicrafts</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ product.price }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" value="{{ product.stock }}" required>
+            </div>
+
+            
+
+            <div class="mb-3">
+                <label for="image_front" class="form-label">Image Front</label>
+                <input type="file" class="form-control" id="image_front" name="image_front"><br>
+                {% if product.image_front %}
+                    <img src="{{ product.image_front.url }}" alt="{{ product.name }} - Front" style="max-width: 100px; max-height: 100px;">
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="image_back" class="form-label">Image Back</label>
+                <input type="file" class="form-control" id="image_back" name="image_back"><br>
+                {% if product.image_back %}
+                    <img src="{{ product.image_back.url }}" alt="{{ product.name }} - Back" style="max-width: 100px; max-height: 100px;">
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Product</button>
+        </form>
+    </div>
+</body>
+</html>

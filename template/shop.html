@@ -1,0 +1,896 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HANDMADE GIFTS </title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="Googlebot" content="noindex">
+    <meta name="description" content="HANDMADE GIFTS ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .no-products-found {
+            text-align: center; 
+            padding: 30px 0;
+            justify-content: center;
+            align-items: center;
+            height: 400px; 
+            width: 100%; 
+            margin-left: 20px; 
+        }
+    
+        .message-title {
+            font-size: 36px;
+            font-family: 'Dancing Script', cursive, sans-serif;
+            color: #d98f5f;  
+            margin-bottom: 10px;
+        }
+       
+
+        .message-subtitle {
+            font-size: 24px;
+            color: #4a6572c5;
+            margin-bottom: 30px;
+        }
+    
+        .illustration-container img {
+            max-width: 350px; 
+            margin-bottom: 0;
+        }
+    
+        .btn-view-products {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #d98f5f; 
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn-view-products:hover {
+            background-color: #0f0f0f;  
+        }
+    
+        .wishlist-added {
+            color: red;
+        }
+    </style>
+    <style>
+        .popup-notification {
+            position: fixed;
+            bottom: 20px;  
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #d98f5f;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+        }
+        
+        .popup-notification.show {
+            opacity: 1;
+            bottom: 40px; 
+        }
+        
+        .popup-notification .login-link {
+            color: black;
+            text-decoration: underline;
+        }
+        
+        .popup-notification .login-link:hover {
+            color: #f00;
+            text-decoration: none;
+        }
+        </style>
+        
+    <style>
+        .popup {
+            position: relative;
+            margin: 0 auto;
+            max-width: 80%;
+            padding: 15px;
+            background-color: #cb8a8a;
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup.hidden {
+            display: none;
+        }
+
+        .popup button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #popup-message {
+            margin-top: 10px; 
+        }
+
+        .out-of-stock-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold; 
+            text-align: center;
+            cursor: not-allowed; 
+            opacity: 0.8; 
+            transition: opacity 0.3s ease, transform 0.2s ease; 
+        }
+
+        .out-of-stock-button:hover {
+            opacity: 1; 
+            transform: scale(1.05); 
+        }
+
+    </style>
+   
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-top-area bg-dark">
+            <div class="container-full px-50">
+                <div class="row">
+                    <div class="col py-2 py-lg-0 d-flex flex-column align-items-center flex-md-row justify-content-center justify-content-md-between">
+                        <div class="header-top-area-left-side d-flex">
+                            <div class="social-share d-flex gap-2 header-top-area-left-side-item">
+                                <a class="social-share-link facebook" href="https://www.facebook.com/login.php"   aria-label="facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="social-share-link twitter" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D""  aria-label="twitter">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a class="social-share-link instagram" href="https://www.instagram.com/accounts/login/"  aria-label="instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                
+                            </div>
+
+                            <div class="contact-number header-top-area-left-side-item">
+                                <a href="tel:+1234567890">
+                                    <i class="icon-rt-call-outline"></i>
+                                    <span>+91 9745865033</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="header-top-area-right-side d-flex">
+                            <div class="header-top-area-right-side-item">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'logout' %}" class="icon-rt-user" ><i class="icon-rt-user"></i>Logout</a>
+
+                                {% else %}
+                               
+                                <a href="{% url 'login' %}" >
+                                    <i class="icon-rt-user"></i>Sign in
+                                </a>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="hader-bottom-area sticky-header">
+            <div class="container-full px-50">
+                <div class="row align-items-center">
+                    <div class="col-4 col-lg-5">
+                        {% include 'nav.html' %}
+
+                        <button class="header-action-item d-md-none" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button> 
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        <div class="logo text-center">
+                            <a href="{% url 'index' %}" style="height: 50px; width: 100px; color: #d98f5f;">
+                        
+                                <span style="font-weight: bold; font-style: italic; font-family: cursive;">HANDMADE GIFTS</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-5">
+                        <div class="header-action d-flex justify-content-end">
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Admin Dashboard">
+                                            <a href="{% url 'admin' %}" class="header-action-item">
+                                                <i class="fa-solid fa-crown" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% elif user.type == 'seller' %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Sell with Us">
+                                            <a href="{% url 'seller_dashboard' %}" class="header-action-item">
+                                                <i class="fa-solid fa-money-bill-wave" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            <button class="header-action-item d-none d-md-block" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <a href="{% url 'wishlist' %}" class="header-action-item" title="Wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span id="wishlist-count" class="header-action-item-count">({{ wishlist_count }})</span>
+                            </a>
+                            <a href="{% url 'cart' %}" class="header-action-item" title="Cart Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <main>
+        <section class="breadcrumb-section">
+            <div class="breadcrumb-image">
+                <img src="{% static 'images/banners/breadcrumb_bag.jpg' %}" alt="breadcrumb bg" width="1920" height="292">
+            </div>
+            <div class="breadcrumb-content text-center">
+                <h2 class="mb-2">Shop</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+
+                        <li class="breadcrumb-item"><a href="{% url 'products_by_category' 'all' %}">shop</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Shop Categories</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="shop-page section-space-ptb border-bottom-1">
+            <div id="popup-message" class="popup hidden">
+                <span id="popup-message-text"></span>
+                <button id="popup-close-btn" style="background:none; border:none; font-size:18px; color:white;">&times;</button>
+            </div>
+            
+            <div class="container">
+
+                <div class="shop-subcategories-wrapper mb-10">
+                    <div class="swiper shop-subcategories-slider-active">
+                        <div class="swiper-wrapper">
+                            
+                        </div>
+                        
+                        <div class="shop-subcategory-swiper-pagination mt-3 text-center"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-3 order-2 order-lg-1">
+                        <aside class="shop-sidebar">
+                            <div class="shop-sidebar-widget">
+                                <h5 class="shop-sidebar-widget-title"> Categories</h5>
+                                <ul class="shop-sidebar-widget-list">
+                                    <li class="shop-sidebar-widget-list-item">
+                                        <a href="{% url 'products_by_category' 'accessories' %}"class="shop-sidebar-widget-list-link">Accessories</a>
+                                    </li>
+                                    <li class="shop-sidebar-widget-list-item">
+                                        <a href="{% url 'products_by_category' 'clothing' %}" class="shop-sidebar-widget-list-link">Clothing</a>
+                                    </li>
+                                    <li class="shop-sidebar-widget-list-item">
+                                        <a href="{% url 'products_by_category' 'arts' %}" class="shop-sidebar-widget-list-link">Art</a>
+                                    </li>
+                                    <li class="shop-sidebar-widget-list-item">
+                                        <a href="{% url 'products_by_category' 'handicrafts' %}" class="shop-sidebar-widget-list-link">Handicrafts</a>
+                                    </li>
+                                    <li class="shop-sidebar-widget-list-item">
+                                        <a href="{% url 'products_by_category' 'all' %}" class="shop-sidebar-widget-list-link">All</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="shop-sidebar-widget">
+                                <h5 class="shop-sidebar-widget-title">Filter By Price</h5>
+                                <div class="sidebar-widget-item__filter price-range-filter">
+                                    <form id="priceFilterForm" action="{% url 'products_by_category' category|default_if_none:'all' %}" method="GET">
+                                        <div class="filter-slider">
+                                            <div class="filter-progress"></div>
+                                        </div>
+                                        <div class="filter-range-input">
+                                            <input type="range" class="range-min" id="minPrice" name="min_price" min="0" max="5000" value="{{ min_price|default_if_none:0 }}" step="10" aria-label="Min value" />
+                                            <input type="range" class="range-max" id="maxPrice" name="max_price" min="0" max="5000" value="{{ max_price|default_if_none:5000 }}" step="10" aria-label="Max value" />
+                                        </div>
+                                    
+                                        <p class="filter-price-value">
+                                            Price: 
+                                            ₹<input type="text" class="input-min" id="minPriceDisplay" name="min_price_display" value="{{ min_price|default_if_none:0 }}" readonly />
+                                            — 
+                                            ₹<input type="text" class="input-max" id="maxPriceDisplay" name="max_price_display" value="{{ max_price|default_if_none:20000 }}" readonly />
+                                        </p>
+                                    
+                                        <input type="hidden" name="q" value="{{ query|default_if_none:'' }}">
+                                    
+                                        <input type="hidden" name="orderby" value="{{ orderby|default_if_none:'menu_order' }}">
+                                    
+                                        <button type="submit" class="filter-price-btn">Filter</button>
+                                    </form>
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                        </aside>
+                    </div>
+                    <div class="col-12 col-lg-9 order-1 order-lg-2 ps-xl-6">
+                        <div class="shop-all-product-wrapper">
+                            <div class="shop-toolbar">
+                                <div class="shop-toolbar-left-side d-flex">
+                                    
+                                </div>
+                                <div class="shop-toolbar-right-side">
+                                    <form id="sortingForm" method="GET">
+                                        <select name="orderby" class="shop-selector-orderby" aria-label="Shop order" onchange="this.form.submit()">
+                                            <option value="menu_order" {% if orderby == 'menu_order' %}selected{% endif %}>Default sorting</option>
+                                            <option value="price" {% if orderby == 'price' %}selected{% endif %}>Sort by price: low to high</option>
+                                            <option value="price-desc" {% if orderby == 'price-desc' %}selected{% endif %}>Sort by price: high to low</option>
+                                        </select>
+                                    
+                                        <input type="hidden" name="q" value="{{ query|default_if_none:'' }}">
+                                    
+                                        <input type="hidden" name="min_price" value="{{ min_price|default_if_none:0 }}">
+                                        <input type="hidden" name="max_price" value="{{ max_price|default_if_none:5000 }}">
+                                    
+                                        <input type="hidden" name="category" value="{{ category|default_if_none:'all' }}">
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                    
+                            <div class="products-wrapper shop-view-item-grid">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+                                    {% if products %}
+                                        {% for product in products %}
+                                        <div class="col">
+                                            <div class="product-card">
+                                                <div class="product-card-thumb-area">
+                                                    <a href="{% url 'product-details' product.id %}" class="product-card-thumb" target="_blank">
+                                                        <img class="product-card-thumb-primary" src="{{ product.image_front.url }}" alt="Product Image primary 1" width="340" height="320">
+                                                    </a>
+                                                    <button class="product-card-action-quickview" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price=" {{ product.price|floatformat:0 }}" data-product-description="{{ product.description }}" data-product-stock="{{ product.stock }}" data-product-image-front="{% if product.image_front %}{{ product.image_front.url }}{% endif %}" data-product-image-back="{% if product.image_back %}{{ product.image_back.url }}{% endif %}" data-in-cart="{% if product.id in cart_items %}true{% else %}false{% endif %}" data-bs-target="#product-modal-active" data-bs-toggle="modal">
+                                                        Quick View
+                                                    </button>
+                                                    <ul class="product-card-action-links">
+                                                        <li class="product-card-action-item">
+                                                            <a href="#" class="product-card-action-link wishlist-toggle" aria-label="wishlist" data-product-id="{{ product.id }}">
+                                                                <i class="fa-regular fa-heart {% if product in wishlist_products %}fa-solid wishlist-added{% endif %}"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product-card-content">
+                                                    <h4 class="product-card-title">
+                                                        <a href="{% url 'product-details' product.id %}" target="_blank">{{ product.name }}</a>
+                                                    </h4>
+                                                    <div class="product-card-price">
+                                                        <span class="visually-hidden">Price</span>
+                                                        <span class="product-card-regular-price">₹ {{ product.price|floatformat:0 }}</span>
+                                                    </div>
+                                                    <div class="product-card-list-view-action">
+                                                        <p class="fs-16">{{ product.description }}</p>
+                                                        {% if product.stock > 0 %}
+                                                        {% if user.is_authenticated %}
+                                                            {% if product.id in cart_items %}
+                                                                <a href="{% url 'cart' %}" class="btn-outline-dark btn-md">View Cart</a>
+                                                            {% else %}
+                                                                <a href="{% url 'add_to_cart' product.id %}" class="btn-outline-dark btn-md">Add to Cart</a>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <a href="{% url 'add_to_cart' product.id %}" class="btn-outline-dark btn-md">Add to Cart</a>
+                                                            {% endif %}
+                                                    {% else %}
+                                                        <a class="btn-outline-dark btn-md disabled text-muted">Out of Stock</a>
+                                                    {% endif %}
+                                                    
+                
+                                                        
+                                                    </div>
+                                                    {% if product.stock > 0 %}
+                                                    {% if user.is_authenticated %}
+                                                        {% if product.id in cart_items %}
+                                                            <a href="{% url 'cart' %}" class="product-card-box-cart">View Cart</a>
+                                                        {% else %}
+                                                            <a href="{% url 'add_to_cart' product.id %}" class="product-card-box-cart">Add to Cart</a>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <a href="{% url 'add_to_cart' product.id %}" class="product-card-box-cart">Add to Cart</a>
+                                                    {% endif %}
+                                                    {% else %}
+                                                        <span class="product-card-box-cart text-muted">Out of Stock</span>
+                                                        
+                                                    {% endif %}
+                                                
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    <div class="no-products-found">
+                                        <h1 class="message-title">Sorry! No Products Found!</h1>
+                                        <h2 class="message-subtitle">Widen Your Search</h2>
+                                        <div class="illustration-container">
+                                            <img src="{% static 'images/no-products-found-illustration.png' %}" alt="No products illustration">
+                                        </div>
+                                        <a href="{% url 'products_by_category' 'all' %}" class="btn-view-products">View All Products</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                    
+                                {% if products.has_other_pages %}
+                                    <div class="pagination-area">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination">
+                                                {% if products.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ products.previous_page_number }}&min_price={{ min_price }}&max_price={{ max_price }}&orderby={{ orderby }}{% if query %}&q={{ query }}{% endif %}" aria-label="Previous">
+                                                            <span aria-hidden="true">←</span>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+
+                                                {% for num in products.paginator.page_range %}
+                                                    <li class="page-item {% if products.number == num %}active{% endif %}">
+                                                        <a class="page-link" href="?page={{ num }}&min_price={{ min_price }}&max_price={{ max_price }}&orderby={{ orderby }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                                                    </li>
+                                                {% endfor %}
+
+                                                {% if products.has_next %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ products.next_page_number }}&min_price={{ min_price }}&max_price={{ max_price }}&orderby={{ orderby }}{% if query %}&q={{ query }}{% endif %}" aria-label="Next">
+                                                            <span aria-hidden="true">→</span>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    
+    <div class="offcanvas offcanvas-top offcanvas-search-area" tabindex="-1" id="offcanvas-search">
+        <div class="offcanvas-search-wrap">
+            <div class="offcanvas-search-header">
+                <div class="offcanvas-search-title">
+                    <span class="visually-hidden">Search</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-search-body">
+                <div class="offcanvas-search-box">
+                    <form action="{% url 'products_by_category' 'all' %}" method="GET" class="offcanvas-search-form">
+                        <input type="text" name="q" placeholder="Search..." class="offcanvas-search-input" required>
+                        <button type="submit" class="offcanvas-search-submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="offcanvas-search-content">
+                        <div class="offcanvas-search-keywords-list">
+                            <p class="offcanvas-search-key-title">Popular searches :</p>
+                            <ul class="offcanvas-search-popular d-flex gap-1">
+                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="btn btn-xs btn-gray btn-rounde-2">accessories</a></li>
+                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="btn btn-xs btn-gray btn-rounde-2">clothing</a></li>
+                                <li><a href="{% url 'products_by_category' 'arts' %}" class="btn btn-xs btn-gray btn-rounde-2">arts</a></li>
+                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="btn btn-xs btn-gray btn-rounde-2">handicrafts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+    <div class="navbar-mobile-menu"></div>
+    
+
+    <div class="modal fade" id="product-modal-active" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered product-quick-view-modal">
+            <div class="modal-content">
+                <button type="button" class="btn-close position-absolute end-0 p-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="product-item-details px-3 py-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="swiper product-details-lg-active">
+                                <div class="swiper-wrapper">
+                                    {% if product.image_front %}
+                                    <div class="swiper-slide">
+                                        <img class="w-full" src="{{ product.image_front.url }}"  alt="Front Image of {{ product.name }}"  />
+                                    </div>
+                                    {% endif %}
+                                    {% if product.image_back %}
+                                    <div class="swiper-slide">
+                                        <img class="w-full" src="{{ product.image_back.url }}" alt="image" />
+                                    </div>
+                                    {% endif %}
+                                    
+                                </div>
+                                <div class="product-details-button-next product-details-navigation-next"><i class="fa-solid fa-chevron-right"></i></div>
+                                <div class="product-details-button-prev product-details-navigation-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product-item-details-box">
+                                <h4 class="product-item-details-title">{{ product.name }}</h4>
+                                <div class="product-item-details-rating d-flex align-items-center gap-2 text-black">
+                                   
+                                </div>
+
+                                <div class="product-card-price mt-2">
+                                    <span class="product-card-regular-price">₹ {{ product.price|floatformat:0 }}</span>
+                                </div>
+
+                                <p class="product-item-details-description mt-2 fs-16">{{ product.description }}</p>
+                                
+
+                                <div class="product-item-stock in-stock mb-3">
+                                    <span class="stock-label visually-hidden">Availability:</span>
+                                    <span class="product-item-stock-in">{{ product.stock }} In Stock</span>
+                                </div>
+
+                                <div class="product-item-action-box d-flex gap-2 align-items-center">
+                                    {% if product.stock > 0 %}
+                                        <p>{{ product.stock }} In Stock</p>
+                                        {% if user.is_authenticated %}
+                                            {% if product.id in cart_items %}
+                                                <a href="{% url 'cart' %}" class="btn-outline-dark btn-md">View Cart</a>
+                                            {% else %}
+                                                <a href="{% url 'add_to_cart' product.id %}" class="btn-outline-dark btn-md">Add to Cart</a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="{% url 'login' %}" class="btn-outline-dark btn-md">Add to Cart</a>
+                                        {% endif %}
+                                    {% else %}
+                                        <p>Out of Stock!</p>
+                                        <a class="btn-outline-dark btn-md disabled text-muted">Out of Stock</a>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+   
+    
+  
+    <footer class="footer-area" style="background-color: #fff; color: #333; text-align: center; padding: 20px;">
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="contact-us">
+                    <a href="{% url 'contact-us' %}" class="widget--menu-link" style="color: #333; font-size: 1.5em; text-decoration: none;">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="loginPopup" class="popup-notification" style="display: none;">
+        <p>Please log in to save items to your wishlist <a href="/login/" class="login-link">Login</a></p>
+    </div>
+
+
+
+    
+     
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let swiperInstance = null; 
+    
+            document.querySelectorAll('.product-card-action-quickview').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var productId = this.getAttribute('data-product-id');
+                    var productName = this.getAttribute('data-product-name');
+                    var productPrice = this.getAttribute('data-product-price');
+                    var productDescription = this.getAttribute('data-product-description');
+                    var productStock = this.getAttribute('data-product-stock');
+                    var productImageFront = this.getAttribute('data-product-image-front');
+                    var productImageBack = this.getAttribute('data-product-image-back');
+                    var inCart = this.getAttribute('data-in-cart');
+    
+                    console.log("Product Stock:", productStock);
+                    console.log("In Cart:", inCart);
+    
+                    document.querySelector('#product-modal-active .product-item-details-title').innerText = productName;
+                    document.querySelector('#product-modal-active .product-card-regular-price').innerText = '₹' +  productPrice;
+                    document.querySelector('#product-modal-active .product-item-details-description').innerText = productDescription;
+    
+                    var stockElement = document.querySelector('#product-modal-active .product-item-stock-in');
+                    if (productStock > 0) {
+                        stockElement.innerText = productStock + ' In Stock';
+                        stockElement.style.display = '';
+                    } else {
+                        stockElement.style.display = 'none';
+                    }
+    
+                    var swiperWrapper = document.querySelector('#product-modal-active .product-details-lg-active .swiper-wrapper');
+                    swiperWrapper.innerHTML = ''; 
+    
+                    if (productImageFront) {
+                        var frontSlide = document.createElement('div');
+                        frontSlide.classList.add('swiper-slide');
+                        frontSlide.innerHTML = '<img class="w-full" src="' + productImageFront + '" alt="Front Image of ' + productName + '">';
+                        swiperWrapper.appendChild(frontSlide);
+                    }
+    
+                    if (productImageBack && productImageBack !== productImageFront) {
+                        var backSlide = document.createElement('div');
+                        backSlide.classList.add('swiper-slide');
+                        backSlide.innerHTML = '<img class="w-full" src="' + productImageBack + '" alt="Back Image of ' + productName + '">';
+                        swiperWrapper.appendChild(backSlide);
+                    }
+    
+                    if (swiperInstance) {
+                        swiperInstance.destroy(true, true);
+                    }
+    
+                    swiperInstance = new Swiper('.product-details-lg-active', {
+                        slidesPerView: 1,
+                        loop: true,
+                        navigation: {
+                            nextEl: '.product-details-button-next',
+                            prevEl: '.product-details-button-prev',
+                        },
+                    });
+    
+                    var actionBox = document.querySelector('#product-modal-active .product-item-action-box');
+                    if (productStock > 0) {
+                        if (inCart === "true") {
+                            actionBox.innerHTML = `
+                                <a href="/cart/" class="btn-outline-dark btn-md">View Cart</a>
+                            `;
+                        } else {
+                            actionBox.innerHTML = `
+                                <a href="/add_to_cart/${productId}" class="btn-outline-dark btn-md">Add to Cart</a>
+                            `;
+                        }
+                    } else {
+                        actionBox.innerHTML = `
+                            <a class="btn-md out-of-stock-button disabled">Out of Stock</a>
+                        `;
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const minPrice = document.getElementById('minPrice');
+    const maxPrice = document.getElementById('maxPrice');
+    const minPriceDisplay = document.getElementById('minPriceDisplay');
+    const maxPriceDisplay = document.getElementById('maxPriceDisplay');
+
+    function updatePriceDisplay() {
+        minPriceDisplay.value = minPrice.value;
+        maxPriceDisplay.value = maxPrice.value;
+    }
+
+    minPrice.addEventListener('input', function() {
+        if (parseInt(minPrice.value) > parseInt(maxPrice.value)) {
+            minPrice.value = maxPrice.value;
+        }
+        updatePriceDisplay();
+    });
+
+    maxPrice.addEventListener('input', function() {
+        if (parseInt(maxPrice.value) < parseInt(minPrice.value)) {
+            maxPrice.value = minPrice.value;
+        }
+        updatePriceDisplay();
+    });
+
+    updatePriceDisplay();
+
+    const sortingForm = document.getElementById('sortingForm');
+    const priceFilterForm = document.getElementById('priceFilterForm');
+
+    sortingForm.querySelector('select').addEventListener('change', function() {
+        const minPriceInput = document.createElement('input');
+        minPriceInput.type = 'hidden';
+        minPriceInput.name = 'min_price';
+        minPriceInput.value = minPrice.value;
+
+        const maxPriceInput = document.createElement('input');
+        maxPriceInput.type = 'hidden';
+        maxPriceInput.name = 'max_price';
+        maxPriceInput.value = maxPrice.value;
+
+        sortingForm.appendChild(minPriceInput);
+        sortingForm.appendChild(maxPriceInput);
+    });
+    });
+
+    </script>
+    
+    
+    
+    <script>
+            $(document).ready(function() {
+        $('#addToCartButton').click(function() {
+            $(this).prop('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('href'),
+                method: 'POST',
+                success: function(response) {
+                    $('#addToCartButton').text('View Cart');
+                    $('#addToCartButton').prop('disabled', false);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% if messages %}
+            let messageText = "{% for message in messages %}{{ message }}{% endfor %}";
+            
+            let popup = document.getElementById('popup-message');
+            let popupText = document.getElementById('popup-message-text');
+            popupText.innerHTML = messageText;
+            popup.classList.remove('hidden'); 
+
+            document.getElementById('popup-close-btn').addEventListener('click', function() {
+                popup.classList.add('hidden');
+            });
+
+            setTimeout(function() {
+                popup.classList.add('hidden');
+            }, 3000);
+            {% endif %}
+        });
+    </script>
+
+         
+    <script>
+        document.querySelectorAll('.wishlist-toggle').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                const heartIcon = this.querySelector('i');
+                
+                const action = heartIcon.classList.contains('fa-solid') ? 'wishremove' : 'add_to_wishlist';
+
+                fetch(`/${action}/${productId}/`, {  
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    if (response.status === 403) {
+                        showPopup();
+                        throw new Error('User not authenticated');
+                    } else if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+                    return response.json();  
+                })
+                .then(data => {
+                    const wishlistCountElement = document.getElementById('wishlist-count');
+                    let currentCount = parseInt(wishlistCountElement.textContent.replace(/[()]/g, '')) || 0;
+
+                    if (data.status === 'added') {
+                        heartIcon.classList.remove('fa-regular'); 
+                        heartIcon.classList.add('fa-solid', 'wishlist-added'); 
+                        
+                        wishlistCountElement.textContent = `(${currentCount + 1})`;
+                    } else if (data.status === 'removed') {
+                        heartIcon.classList.remove('fa-solid', 'wishlist-added');  
+                        heartIcon.classList.add('fa-regular');
+
+                        wishlistCountElement.textContent = `(${currentCount - 1})`;
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+            });
+        });
+
+        function showPopup() {
+            const popup = document.getElementById('loginPopup');
+            
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 10); 
+        
+            setTimeout(() => {
+                popup.classList.remove('show');
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 300); 
+            }, 3000); 
+        }
+    </script>
+                 
+</body>
+
+</html>

@@ -1,0 +1,847 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HANDMADE GIFTS </title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="Googlebot" content="noindex">
+    <meta name="description" content="HANDMADE GIFTS ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        
+        .form-container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: auto;
+            height: auto;
+            display: block;
+            margin-left:0;
+            line-height: 30px ;
+            
+            background-color: #FFF0E9;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group .description {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .form-group button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:disabled {
+            background-color: #555;
+        }
+
+        .popup-message {
+            display: none; 
+            position: fixed;
+            top: 100px;
+            right: 10px;
+            background-color: #555;
+            color: #fffafa;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-popup {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            color: #fffafa;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .close-popup:hover {
+            color: #ccc;
+        }
+        .custom-background {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L18 9l-4.66 3.52L15 19l-3-2.26L9 19l1.66-6.48L6 9l3.91-0.74L12 2z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            width: 100%;
+            height: 100vh;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .half-width {
+            width: 48%;
+        }
+        @media (max-width: 600px) {
+        .form-row {
+            flex-direction: column;
+        }
+        .half-width {
+            width: 100%;
+        }
+    }
+
+    
+
+        .table {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .badge {
+        padding: 0.5em 0.75em;
+        font-size: 0.85rem;
+    }
+
+    .alert {
+        
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .btn-primary {
+        background-color: #5a67d8;
+        border: none;
+    }
+
+
+    </style>
+    
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-top-area bg-dark">
+            <div class="container-full px-50">
+                <div class="row">
+                    <div class="col py-2 py-lg-0 d-flex flex-column align-items-center flex-md-row justify-content-center justify-content-md-between">
+                        <div class="header-top-area-left-side d-flex">
+                            <div class="social-share d-flex gap-2 header-top-area-left-side-item">
+                                <a class="social-share-link facebook" href="https://www.facebook.com/login.php"  aria-label="facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="social-share-link twitter" href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D"  aria-label="twitter">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a class="social-share-link instagram" href="https://www.instagram.com/accounts/login/"  aria-label="instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                
+                            </div>
+
+                            <div class="contact-number header-top-area-left-side-item">
+                                <a href="tel:+1234567890">
+                                    <i class="icon-rt-call-outline"></i>
+                                    <span>+91 9745865033</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="header-top-area-right-side d-flex">
+                            <div class="header-top-area-right-side-item">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'logout' %}" class="icon-rt-user" ><i class="icon-rt-user"></i>Logout</a>
+
+                                {% else %}
+                                <a href="{% url 'login' %}" data-bs-toggle="modal">
+                                    <i class="icon-rt-user"></i>
+                                    Sign in
+                                </a>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-bottom-area sticky-header">
+            <div class="container-full px-50">
+              <div class="row align-items-center">
+                <div class="col-lg-4">
+                  {% include 'nav.html' %}
+          
+                  <button class="header-action-item d-lg-none mobile-menu-action" aria-label="Mobile Menu Action Button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-mobile-menu">
+                    <i class="fa-solid fa-bars"></i>
+                  </button> <button class="header-action-item d-md-none" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button> </div>
+          
+                  <div class="col-lg-4 text-center">
+                    <div class="logo text-center">
+                        <a href="{% url 'index' %}" style="height: 50px; width: 100px; color: #d98f5f;">
+                    
+                            <span style="font-weight: bold; font-style: italic; font-family: cursive;">HANDMADE GIFTS</span>
+                        </a>
+                    </div>
+                  </div>
+          
+                <div class="col-lg-4">
+                  <div class="header-action d-flex justify-content-end">
+                    {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Admin Dashboard">
+                                            <a href="{% url 'admin' %}" class="header-action-item">
+                                                <i class="fa-solid fa-crown" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% elif user.type == 'seller' %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Sell with Us">
+                                            <a href="{% url 'seller_dashboard' %}" class="header-action-item">
+                                                <i class="fa-solid fa-money-bill-wave" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                    <button class="header-action-item d-none d-md-block" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <a href="{% url 'wishlist' %}" class="header-action-item" title="Wishlist">
+                      <i class="fa-regular fa-heart"></i>
+                      <span class="header-action-item-count">({{ wishlist_count }})</span>
+                    </a>
+                    <a href="{% url 'cart' %}" class="header-action-item" title="Cart Bag">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </a>
+                  </div> </div>
+              </div>
+            </div>
+          </div>
+
+    </header>
+
+
+
+    <main>
+        <section class="breadcrumb-section">
+            <div class="breadcrumb-image">
+                <img src="{% static 'images/banners/breadcrumb_bag.jpg' %}" alt="breadcrumb bg" width="1920" height="292">
+            </div>
+            <div class="breadcrumb-content text-center">
+                <h2 class="mb-2">My Accounts</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">My Accounts</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="my-account-page section-space-ptb border-bottom-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="account-dashboard fs-16">
+                            <div class="dashboard-upper-info">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="d-single-info">
+                                            <p class="user-name">Hello <span>{{ request.user.username }}!</span></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-2 col-md-12">
+                                        <div class="d-single-info text-lg-center">
+                                            <a href="{% url 'cart' %}" class="view-cart"><i class="fa fa-cart-plus"></i> View cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-2">
+                                    <ul role="tablist" class="nav flex-column dashboard-list">
+                                        
+                                        {% if user.is_authenticated %}
+                                        <li><a href="#dashboard" data-bs-toggle="tab" class="nav-link active" aria-selected="true" role="tab">Dashboard</a></li>
+                                        <li>
+                                            <a href="#orders" 
+                                               class="nav-link {% if active_tab == 'orders' %}active{% endif %}" 
+                                               data-bs-toggle="tab" 
+                                               data-url="{% url 'fetch_orders' %}" 
+                                               id="orders-tab">
+                                                Orders
+                                            </a>
+                                        </li>
+                                        
+                                        <li><a href="#address" data-bs-toggle="tab" class="nav-link" aria-selected="false" tabindex="-1" role="tab">Addresses</a></li>
+                                        <li><a href="#account-details" data-bs-toggle="tab" class="nav-link" role="tab">Account details</a></li>
+                                        <li><a href="{% url 'logout' %}" class="nav-link" aria-selected="false" tabindex="-1" role="tab">logout</a></li>
+                                        {% endif %}
+                                        
+
+                                        
+                                    </ul>
+                                </div>
+                                <div class="col-md-12 col-lg-10">
+                                    <div class="tab-content dashboard-content">
+                                        <div class="tab-content">
+
+
+                                        <div class="tab-pane active" id="dashboard" role="tabpanel">
+                                            <h3>Dashboard </h3>
+                                            <p>
+                                                From your Account dashboard, you can easily view your 
+                                                <a href="#orders" id="order">recent orders</a>, 
+                                                manage your <a href="#address">shipping and billing addresses</a>, 
+                                                and <a href="#account-details">edit your password and account details.</a>
+                                            </p>
+                                        </div>
+                                        <div class="tab-pane fade {% if active_tab == 'orders' %}show active{% endif %}" id="orders">
+                                            <h2 class="mb-4">Your Orders</h2>
+                                            <div id="orders-content">
+                                                {% if orders %}
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead class="table-light">
+                                                                <tr>
+                                                                    <th>Order Date</th>
+                                                                    <th>Total Amount</th>
+                                                                    <th>Order Items</th>
+                                                                    <th>View Details</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for order in orders %}
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p><strong>Date:</strong> {{ order.order_date|date:"d-m-Y" }}</p>
+                                                                            <p><strong>Time:</strong> {{ order.order_date|date:"h:i A" }}</p>
+                                                                        </td>
+                                                                        <td>₹ {{ order.total_amount|floatformat:0 }}</td>
+                                                                        <td>
+                                                                            <ul>
+                                                                                {% for item in order.order_items.all %}
+                                                                                    <li>
+                                                                                        <strong>Product:</strong> {{ item.product.name }}<br>
+                                                                                        <strong>Seller:</strong> {{ item.product.seller.username }}<br>
+                                                                                        <strong>Delivery Status:</strong>
+                                                                                        {% if item.status == 'pending' %}
+                                                                                            <span class="badge bg-warning">Pending</span>
+                                                                                        {% elif item.status == 'shipped' %}
+                                                                                            <span class="badge bg-primary">Shipped</span>
+                                                                                        {% elif item.status == 'delivered' %}
+                                                                                            <span class="badge bg-success">Delivered</span>
+                                                                                        {% elif item.status == 'canceled' %}
+                                                                                            <span class="badge bg-danger">Canceled</span>
+                                                                                        {% else %}
+                                                                                            <span class="badge bg-secondary">Unknown</span>
+                                                                                        {% endif %}
+                                                                                    </li>
+                                                                                {% endfor %}
+                                                                            </ul>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{% url 'order_details' order.id %}" class="btn btn-primary btn-sm">View Details</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="custom-alert" role="alert" style="background-color: #f2f4f6; color: #333; border-left: 5px solid #ff9f43; padding: 15px; font-weight: 500; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                                                        No orders found. Start shopping to place your first order! 
+                                                        <a href="{% url 'products_by_category' 'all' %}" style="color: #007bff; font-weight: 600; text-decoration: none;">Shop Now</a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        
+                                        <div class="tab-pane fade" id="address" role="tabpanel">
+                                            <div class="form-container">
+                                                {% if messages %}
+
+                                                <div id="popup-message1" class="popup-message" style="{% if messages %}display: block;{% else %}display: none;{% endif %}">
+                                                    <span>
+                                                            {% for message in messages %}
+                                                                {{ message }}
+                                                            {% endfor %}
+                                                    </span>
+                                                    <button class="close-popup">&times;</button>
+                                                </div>
+                                                {% endif %}
+
+                                                
+                                                
+                                                {% if address %}
+                                                    
+                                                {% else %}
+                                                    <p>No saved address yet. Please fill out the form below to save your address.</p>
+                                                {% endif %}
+                                                
+                                                <h4>Shipping Address with Name and Contact Number</h4>
+                                                <p style="color:  #007bff; font-weight: bold;">Delivery is only available within Kerala.</p>
+                                                
+                                                <form id="settingsForm" action="{% url 'save_address' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="form-row">
+                                                        <div class="form-group half-width">
+                                                            <label for="name">Name</label>
+                                                            <input 
+                                                                type="text" 
+                                                                id="name" 
+                                                                name="name" 
+                                                                value="{{ user.username }}" 
+                                                                required 
+                                                                {% if address %}value="{{ address.name }}"{% endif %} 
+                                                                readonly 
+                                                                style="cursor: not-allowed; background-color: #f9f9f9; border: 1px solid #ddd;">
+                                                        </div>
+                                                        
+                                                        
+                                        
+                                                        <div class="form-group half-width">
+                                                            <label for="phone">Phone <span style="color: red;"> *</span></label>
+                                                            <input type="text" id="phone" name="phone" required value="{% if address %}{{ address.phone }}{% endif %}">
+                                                        </div>
+                                                    </div>
+                                        
+                                                    <div class="form-group">
+                                                        <label for="street">Address <span style="color: red;"> *</span></label>
+                                                        <input type="text" id="street" name="street" placeholder="House number and street name" required value="{% if address %}{{ address.street }}{% endif %}">
+                                                    </div>
+                                        
+                                                    <div class="form-group">
+                                                        <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, unit etc. (optional)" value="{% if address %}{{ address.apartment }}{% endif %}">
+                                                    </div>
+                                        
+                                                    <div class="form-group">
+                                                        <label for="city">Town / City <span style="color: red;"> *</span></label>
+                                                        <select class="form-group" id="city" name="city" required>
+                                                            <option value="" disabled selected>Select</option>
+                                                            <option value="Alappuzha" {% if address and address.city == 'Alappuzha' %}selected{% endif %}>Alappuzha</option>
+                                                            <option value="Ernakulam" {% if address and address.city == 'Ernakulam' %}selected{% endif %}>Ernakulam</option>
+                                                            <option value="Idukki" {% if address and address.city == 'Idukki' %}selected{% endif %}>Idukki</option>
+                                                            <option value="Kannur" {% if address and address.city == 'Kannur' %}selected{% endif %}>Kannur</option>
+                                                            <option value="Kasargod" {% if address and address.city == 'Kasargod' %}selected{% endif %}>Kasargod</option>
+                                                            <option value="Kollam" {% if address and address.city == 'Kollam' %}selected{% endif %}>Kollam</option>
+                                                            <option value="Kottayam" {% if address and address.city == 'Kottayam' %}selected{% endif %}>Kottayam</option>
+                                                            <option value="Kozhikode" {% if address and address.city == 'Kozhikode' %}selected{% endif %}>Kozhikode</option>
+                                                            <option value="Malappuram" {% if address and address.city == 'Malappuram' %}selected{% endif %}>Malappuram</option>
+                                                            <option value="Palakkad" {% if address and address.city == 'Palakkad' %}selected{% endif %}>Palakkad</option>
+                                                            <option value="Pathanamthitta" {% if address and address.city == 'Pathanamthitta' %}selected{% endif %}>Pathanamthitta</option>
+                                                            <option value="Thiruvananthapuram" {% if address and address.city == 'Thiruvananthapuram' %}selected{% endif %}>Thiruvananthapuram</option>
+                                                            <option value="Thrissur" {% if address and address.city == 'Thrissur' %}selected{% endif %}>Thrissur</option>
+                                                            <option value="Wayanad" {% if address and address.city == 'Wayanad' %}selected{% endif %}>Wayanad</option>
+                                                        </select>
+                                                    </div>
+                                        
+                                                    <div class="form-group">
+                                                        <label for="postcode">Postcode / ZIP code<span style="color: red;"> *</span></label>
+                                                        <input type="text" id="postcode" name="postcode" required value="{% if address %}{{ address.postcode }}{% endif %}">
+                                                    </div>
+                                        
+                                                    <div class="form-group">
+                                                        <button type="submit" id="saveButton">Save Changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                            <div class="tab-pane fade" id="account-details" role="tabpanel">
+                                                <h3>Account details</h3>
+                                                {% if messages %}
+
+                                                <div id="popup-message1" class="popup-message" style="{% if messages %}display: block;{% else %}display: none;{% endif %}">
+                                                    <span>
+                                                            {% for message in messages %}
+                                                                {{ message }}
+                                                            {% endfor %}
+                                                    </span>
+                                                    <button class="close-popup">&times;</button>
+                                                </div>
+                                                {% endif %}
+                                                
+
+                                                <form id="settingsForm1" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="displayName">Display Name <span style="color: red;">*</span></label>
+                                                        <input type="text" id="displayName" name="displayName" value="{{ user.username }}">
+                                                        <small id="displayNameError" style="color: red; display: none;">Display name is required.</small>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="email">Email Address <span style="color: red;">*</span></label>
+                                                        <input type="email" id="email" name="email" value="{{ user.email }}">
+                                                        <small id="emailError" style="color: red; display: none;">Valid email is required.</small>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="newPassword">New Password (leave blank to keep the current password)</label>
+                                                        <input type="password" id="newPassword" name="newPassword">
+                                                        <small id="passwordError" style="color: red; display: none;">Passwords must be at least 8 characters long.</small>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="confirmPassword">Confirm New Password</label>
+                                                        <input type="password" id="confirmPassword" name="confirmPassword">
+                                                        <small id="confirmPasswordError" style="color: red; display: none;">Passwords do not match!</small>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <button type="submit" id="saveButton1">Save Changes</button>
+                                                    </div>
+                                                </form>
+
+                                                
+                                            </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="offcanvas offcanvas-top offcanvas-search-area" tabindex="-1" id="offcanvas-search">
+        <div class="offcanvas-search-wrap">
+            <div class="offcanvas-search-header">
+                <div class="offcanvas-search-title">
+                    <span class="visually-hidden">Search</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-search-body">
+                <div class="offcanvas-search-box">
+                    <form action="{% url 'products_by_category' 'all' %}" method="GET" class="offcanvas-search-form">
+                        <input type="text" name="q" placeholder="Search..." class="offcanvas-search-input" required>
+                        <button type="submit" class="offcanvas-search-submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="offcanvas-search-content">
+                        <div class="offcanvas-search-keywords-list">
+                            <p class="offcanvas-search-key-title">Popular searches :</p>
+                            <ul class="offcanvas-search-popular d-flex gap-1">
+                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="btn btn-xs btn-gray btn-rounde-2">accessories</a></li>
+                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="btn btn-xs btn-gray btn-rounde-2">clothing</a></li>
+                                <li><a href="{% url 'products_by_category' 'arts' %}" class="btn btn-xs btn-gray btn-rounde-2">arts</a></li>
+                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="btn btn-xs btn-gray btn-rounde-2">handicrafts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area" style="background-color: #fff; color: #333; text-align: center; padding: 20px;">
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="contact-us">
+                    <a href="{% url 'contact-us' %}" class="widget--menu-link" style="color: #333; font-size: 1.5em; text-decoration: none;">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ordersTab = document.getElementById('orders-tab');
+            const ordersContent = document.getElementById('orders-content');
+        
+            ordersTab.addEventListener('click', function() {
+                if (ordersContent.innerHTML.trim() === '') {
+                    fetch("{% url 'fetch_orders' %}")
+                        .then(response => response.text())
+                        .then(data => {
+                            ordersContent.innerHTML = data;
+                        })
+                        .catch(error => {
+                            console.error("Error fetching orders:", error);
+                            ordersContent.innerHTML = "<p>Failed to load orders. Please try again later.</p>";
+                        });
+                }
+            });
+        });
+        </script>
+        
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('settingsForm');
+        const phoneInput = document.getElementById('phone');
+        const postcodeInput = document.getElementById('postcode');
+        const submitButton = document.getElementById('saveButton');
+        
+        const phoneError = document.createElement('div');
+        phoneError.classList.add('error-message');
+        phoneInput.parentNode.appendChild(phoneError);
+
+        const postcodeError = document.createElement('div');
+        postcodeError.classList.add('error-message');
+        postcodeInput.parentNode.appendChild(postcodeError);
+
+        function validatePhone() {
+            const phoneValue = phoneInput.value.trim();
+            const phoneRegex = /^\d{10}$/;  
+            if (!phoneRegex.test(phoneValue)) {
+                phoneError.textContent = 'Invalid phone number. Please enter a 10-digit number.';
+                phoneError.style.color = 'red';
+                return false;
+            } else {
+                phoneError.textContent = '';
+                return true;
+            }
+        }
+
+        function validatePostcode() {
+            const postcodeValue = postcodeInput.value.trim();
+
+            const validKeralaPostcodes = /^(67[0-9]{4}|68[0-9]{4}|69[0-5][0-9]{3})$/;
+
+            if (!validKeralaPostcodes.test(postcodeValue)) {
+                postcodeError.textContent = 'Invalid postcode. Delivery is only available within Kerala.';
+                postcodeError.style.color = 'red';
+                return false;
+            } else {
+                postcodeError.textContent = '';
+                return true;
+            }
+        }
+
+        phoneInput.addEventListener('input', validatePhone);
+        postcodeInput.addEventListener('input', validatePostcode);
+
+        form.addEventListener('submit', function (e) {
+            if (!validatePhone() || !validatePostcode()) {
+                e.preventDefault();  
+            }
+        });
+    });
+
+    </script>
+    
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const tabLink = document.querySelector(`.nav-link[href="${hash}"]`);
+                if (tabLink) {
+                    tabLink.click(); 
+                }
+            }
+    
+            const popupMessages = document.querySelectorAll('.popup-message');
+    
+            popupMessages.forEach((popup) => {
+                popup.style.display = 'flex';
+    
+                setTimeout(function() {
+                    popup.style.display = 'none';
+                }, 5000); 
+    
+                const closePopupButton = popup.querySelector('.close-popup');
+                if (closePopupButton) {
+                    closePopupButton.addEventListener('click', function() {
+                        popup.style.display = 'none';
+                    });
+                }
+            });
+    
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(String(email).toLowerCase());
+            }
+    
+            function resetErrors() {
+                document.getElementById('displayNameError').style.display = 'none';
+                document.getElementById('emailError').style.display = 'none';
+                document.getElementById('passwordError').style.display = 'none';
+                document.getElementById('confirmPasswordError').style.display = 'none';
+            }
+    
+            document.getElementById('displayName').addEventListener('input', function() {
+                const displayNameError = document.getElementById('displayNameError');
+                displayNameError.style.display = this.value ? 'none' : 'block';
+            });
+    
+            document.getElementById('email').addEventListener('input', function() {
+                const emailError = document.getElementById('emailError');
+                emailError.style.display = validateEmail(this.value) ? 'none' : 'block';
+            });
+    
+            document.getElementById('newPassword').addEventListener('input', function() {
+                const passwordError = document.getElementById('passwordError');
+                const password = this.value;
+    
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordRegex.test(password)) {
+                    passwordError.textContent = 'Password must be at least 8 characters and include a lowercase letter, uppercase letter, number, and special symbol.';
+                    passwordError.style.display = 'block'; 
+                } else {
+                    passwordError.style.display = 'none'; 
+                }
+            });
+    
+            document.getElementById('confirmPassword').addEventListener('input', function() {
+                const confirmPasswordError = document.getElementById('confirmPasswordError');
+                const newPassword = document.getElementById('newPassword').value;
+    
+                if (newPassword && newPassword !== this.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match.';
+                    confirmPasswordError.style.display = 'block'; 
+                } else {
+                    confirmPasswordError.style.display = 'none'; 
+                }
+            });
+    
+            document.getElementById('settingsForm1').addEventListener('submit', function(event) {
+                resetErrors(); 
+    
+                const displayName = document.getElementById('displayName').value;
+                const email = document.getElementById('email').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+    
+                let isValid = true; 
+    
+                if (!displayName) {
+                    document.getElementById('displayNameError').style.display = 'block';
+                    isValid = false;  
+                }
+    
+                if (!email || !validateEmail(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;  
+                }
+    
+                if (newPassword && !passwordRegex.test(newPassword)) {
+                    document.getElementById('passwordError').style.display = 'block';
+                    isValid = false;  
+                }
+    
+                if (newPassword && newPassword !== confirmPassword) {
+                    document.getElementById('confirmPasswordError').style.display = 'block';
+                    isValid = false;  
+                }
+    
+                if (isValid) {
+                    const saveButton = document.getElementById('saveButton1');
+                    
+                    saveButton.textContent = 'Saved';
+                    saveButton.disabled = true;
+    
+                    const popup = document.getElementById('popup-message1');
+                    popup.style.display = 'flex';
+    
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                        saveButton.textContent = 'Save Changes';
+                        saveButton.disabled = false;
+                    }, 5000);
+                } else {
+                    event.preventDefault(); 
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

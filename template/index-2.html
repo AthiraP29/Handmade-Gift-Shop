@@ -1,0 +1,580 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HANDMADE GIFTS </title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="Googlebot" content="noindex">
+    <meta name="description" content="HANDMADE GIFTS">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <style>
+
+        .product-section {
+            background-color: #f9f9f9; 
+            padding: 60px 0;
+        }
+
+        .section-header .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-header .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .feature-highlights .feature-box {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .feature-highlights .feature-box:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-highlights h4 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .feature-highlights p {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .cta-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .cta-subtitle {
+            font-size: 16px;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+
+
+        .hintT-bottom:before {
+            content: attr(data-hint);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000; 
+            color: #fff; 
+            padding: 3px 6px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 12px;
+            opacity: 0; 
+            visibility: hidden;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+
+        .hintT-bottom:hover:before {
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .menu-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .menu-link:hover {
+            color: #fff; 
+        }
+        .custom-font {
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px; 
+            display: inline-block;
+            white-space: nowrap; 
+        }
+        .sell-with-us-section {
+            padding: 60px 0;
+        }
+
+        .text-content h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .text-content p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .btn-link {
+            font-weight: bold;
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .image-content {
+            position: relative;
+        }
+
+        .image-content img {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .overlay-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #333;
+        }
+
+        .overlay-text h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .overlay-text p {
+            font-size: 1.2rem;
+            margin-top: -10px;
+            color: #666;
+        }
+
+        .overlay-text .btn-primary {
+            background-color: #f3e5e5;
+            border: none;
+            color: #333;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+    <header class="header py-3 position-relative position-lg-absolute top-0 w-full z-3">
+        <div class="hader-bottom-area sticky-header">
+            <div class="container-full px-50">
+                <div class="row align-items-center">
+                    <div class="col-4 col-lg-3 order-2 order-lg-1">
+                        <div class="logo text-center text-lg-start-center">
+                            <a href="{% url 'index' %}" style="height: 50px; width: 100px; color:  #d98f5f; text-decoration: none;">
+                                <span class="custom-font">HANDMADE GIFTS</span>
+                            </a>
+                        </div>
+                       
+                    </div>
+        
+                    <div class="col-4 col-lg-6 order-1 order-lg-2">
+                        
+                        <nav class="nav-main-menu d-none d-lg-flex justify-content-center">
+                            
+                            <ul class="main-menu">
+                                    <a href="{% url 'index' %}" class="main-menu-link">Home</a>
+                                    &nbsp;&nbsp;
+                                   
+                                <li class="main-menu-item ">
+                                    <a href="{% url 'products_by_category' 'all' %}"class="main-menu-link">Shop</a>
+                                   
+                                </li>
+                                <li class="main-menu-item has-children">
+                                    <a href="#" class="main-menu-link">Category</a>
+                                    <ul class="megamenu megamenu--mega-lavel-2">
+                                        <li class="megamenu-item">
+                                            <ul>
+                                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="megamenu-link">Accessories</a></li>
+                                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="megamenu-link">Clothing</a></li>
+                                                <li><a href="{% url 'products_by_category' 'arts' %}" class="megamenu-link">Arts</a></li>
+                                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="megamenu-link">Handicrafts</a></li>
+                                                <li><a href="{% url 'products_by_category' 'all' %}" class="megamenu-link">All</a></li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="main-menu-item ">
+                                    <a href="{% url 'about-us' %}" class="main-menu-link">About Us</a>
+                                    
+                                </li>
+                                <li class="main-menu-item has-children">
+                                    <ul class="main-menu">
+                                        {% if user.is_authenticated %}
+                                            
+                                            
+                                            <li class="main-menu-link">
+                                                <div class="menu-item hintT-bottom" data-hint="My Account">
+                                                    <a href="{% url 'my-account' %}" class="menu-link">
+                                                        <svg class="icon sell-with-us-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-10 1.67-10 5v2h20v-2c0-3.33-6.69-5-10-5z"/>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <li><a href="{% url 'logout' %}" class="main-menu-link margin-right: 20px;" >Logout</a></li>
+                                        
+                                        {% else %}
+                                        <li>
+                                            <a href="{% url 'login' %}"  class="main-menu-link" >
+                                                <i class="icon-rt-user"></i>Sign in
+                                            </a>
+                                        </li>
+                                            
+                                           
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                           
+                            </ul>
+                        </nav>
+
+                        
+                    </div>
+                    <div class="col-4 col-lg-3 order-3 order-lg-3">
+                        <div class="header-action d-flex justify-content-end">
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Admin Dashboard">
+                                            <a href="{% url 'admin' %}" class="header-action-item">
+                                                <i class="fa-solid fa-crown" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% elif user.type == 'seller' %}
+                                    <li class="header-action-item ">
+                                        <div class="header-action-item hintT-bottom" data-hint="Sell with Us">
+                                            <a href="{% url 'seller_dashboard' %}" class="header-action-item">
+                                                <i class="fa-solid fa-money-bill-wave" style="font-size: 20px;"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            
+                            <button class="header-action-item d-none d-md-block" title="Search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            
+                            <a href="{% url 'wishlist' %}" class="header-action-item " title="Wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="header-action-item-count">({{ wishlist_count }})</span>
+                            </a>
+                            
+                            <a href="{% url 'cart' %}" class="header-action-item" title="Cart Bag">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+    </header>
+    <main>
+        <section class="hero-area hero-slider-two">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-sm-6 col-md-6 col-lg-6 order-2 order-sm-1">
+                        <div class="hero-slider-content-inner text-start">
+                            <h4 class="hero-slider-sub-title" style="color: #d98f5f;">Discover Unique Creations</h4>
+                            <h1 class="hero-slider-title">Order Your <br> Handmade Gifts Today!</h1>
+                            <p class="text-dark hero-slider-decs fs-5">Explore our exquisite collection of handmade accessories, clothing, arts, and handicrafts. Support independent sellers and find the perfect gift for every occasion!</p>
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 order-1 order-sm-2">
+                        <div class="hero-slider-inner-image mb-8 mb-md-0">
+                            <img src="{% static 'images/sliders/indeximage.webp' %}" alt="Inner image" loading="lazy" width="400" height="560">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-inner-shap-image">
+                <img class="hero-inner-shap-1" src="{% static 'images/sliders/shap-1.png' %}" alt="image">
+                <img class="hero-inner-shap-2" src="{% static 'images/sliders/shap-2.png' %}" alt="image">
+                <img class="hero-inner-shap-3" src="{% static 'images/sliders/shap-3.png' %}" alt="image">
+                <img class="hero-inner-shap-4" src="{% static 'images/sliders/shap-4.png' %}" alt="image">
+                <img class="hero-inner-shap-5" src="{% static 'images/sliders/shap-5.png' %}" alt="image">
+                <img class="hero-inner-shap-6" src="{% static 'images/sliders/shap-6.png' %}" alt="image">
+            </div>
+        </section>
+
+        <section class="banner-section  section-space-pt">
+            <h2 class="visually-hidden">Offer Banner Section</h2>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-6">
+                    <div class="col">
+                        <figure class="banner-card banner-card-animation-one">
+                            <a href="{% url 'products_by_category' 'accessories' %}" class="banner-card-image">
+                                <img src="{% static 'images/banners/img4.png' %}" alt="Banner Image 1" width="450" height="570">
+                            </a>
+                            <figcaption class="banner-card-content position-absolute banner-card-content-bottom banner-card-content-left">
+                                <h6 style="color: #FD3DB5;">New Arrivals</h6> 
+                                <h3 class="mb-3" style="color:black;">Accessories</h3>
+                                <a class="link" href="{% url 'products_by_category' 'accessories' %}" style="color:	#28282B; text-decoration: none;">
+                                    Shop Now <i class="fa-solid fa-arrow-right-long"></i>
+                                </a>
+
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col">
+                        <figure class="banner-card banner-card-animation-one">
+                            <a href="{% url 'products_by_category' 'arts' %}"  class="banner-card-image">
+                                <img src="{% static 'images/banners/arts.jpg' %}" alt="Banner Image 1" width="450" height="570">
+                            </a>
+                            <figcaption class="banner-card-content position-absolute banner-card-content-top banner-card-content-left">
+                                <h6></h6>
+                                <h3 class="mb-3" style="color: black;">Arts</h3>
+                                <a class="link" href="{% url 'products_by_category' 'arts' %}" style="color: white;">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col">
+                        <figure class="banner-card banner-card-animation-one">
+                            <a href="{% url 'products_by_category' 'clothing' %}"class="banner-card-image">
+                                <img src="{% static 'images/banners/clothing.jpg' %}" alt="Banner Image 1" width="450" height="570">
+                            </a>
+                            <figcaption class="banner-card-content position-absolute banner-card-content-bottom banner-card-content-left">
+                                <h3 class="mb-3" style="color:white;">Clothing</h3>
+                                <a class="link" href="{% url 'products_by_category' 'clothing' %}" style="color: white;">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <section class="deal-offer-section position-relative section-space-ptb bg-deal-section-01" style="margin-top: 100px;">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <h2 class="section-title">Experience the Best of Handmade Shopping</h2>
+                    <p class="section-subtitle">
+                        Discover a world of quality handmade products crafted by skilled artisans. With exceptional customer service and secure delivery, we ensure a delightful shopping experience.
+                    </p>
+                </div>
+        
+                <div class="row text-center feature-highlights mb-5">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="feature-box">
+                            <h4>Premium Quality</h4>
+                            <p>Each product is crafted with utmost care and attention to detail, ensuring high-quality handmade items in every purchase.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="feature-box">
+                            <h4>Outstanding Customer Service</h4>
+                            <p>Our dedicated support team is here to provide quick assistance, making your shopping experience smooth and enjoyable.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="feature-box">
+                            <h4>Secure & Reliable Delivery</h4>
+                            <p>Products are shipped securely through trusted couriers, ensuring safe and timely delivery from each seller on our platform.</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="text-center mt-5">
+                    <h3 class="cta-title">Want to Showcase Your Handmade Creations?</h3>
+                    <p class="cta-subtitle">Join us as a seller and reach a community passionate about unique, artisan-crafted items. Showcase your creations on our platform.</p>
+                    <a href="{% url 'seller_dashboard' %}" class="btn btn-primary become-seller-btn">Become a Seller</a>
+                </div>
+            </div>
+        </section>
+       
+        <section class="deal-offer-section position-relative section-space-ptb bg-deal-section-01" style="margin-top: 20px;">
+            <div class="container">
+                <div class="row align-items-center justify-content-center gy-5">
+                    <div class="col-6 col-lg-4 order-1 order-lg-1">
+                        <div class="deal-inner-image deal-inner-image-01 text-center">
+                            <a href="{% url 'products_by_category' 'handicrafts' %}"class="banner-card-image">
+                            <img src="{% static 'images/banners/bu.jpg' %}" alt="deal banner 01" loading="lazy" width="443" height="489">
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4 order-3 order-lg-2">
+                        <div class="deal-offer-inner-content text-center">
+                            <h6>"Where Sellers Showcase Craftsmanship and Customers Find One-of-a-Kind Treasures!"</h6>
+                            
+                            <a href="{% url 'products_by_category' 'all' %}"class="btn-primary btn-lg mt-20">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-4 order-2 order-lg-3">
+                        <div class="deal-inner-image deal-inner-image-02 text-center">
+                            <a href="{% url 'products_by_category' 'handicrafts' %}"class="banner-card-image">
+                            <img src="{% static 'images/banners/image2.jpg' %}" alt="deal banner 02" loading="lazy" width="443" height="489">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <section class="deal-offer-section position-relative section-space-ptb bg-deal-section-01" style="margin-top: 20px;">
+            <div class="container-full px-50">
+                <div class="row align-items-center">
+                   
+                    <div class="col-lg-6 col-md-12 text-start">
+                        <div class="text-content p-5">
+                            <h2 class="section-title">A unique gift shop featuring custom-made items crafted exclusively for you!</h2>
+                            <p class="section-description">
+                                There’s no better way to show appreciation and bring happiness to someone special than by giving a thoughtfully handmade, one-of-a-kind gift. We offer an impressive selection of high-quality, artisan-made treasures from talented creators around the globe, each piece designed with love and care to make your gift truly memorable.
+                            </p>
+                            <a href="{% url 'about-us' %}" class="btn btn-link text-end d-block">About Us</a>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-lg-6 col-md-12 text-center position-relative">
+                        <a href="{% url 'seller_dashboard' %}" style="display: inline-block; position: relative;">
+                            <img src="{% static 'images/sellwithus.webp' %}" alt="Sell with Us" class="img-fluid" style="width: 100%; height: auto; border-radius: 8px;">
+                            
+                            <div style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); text-align: center;">&nbsp;&nbsp
+                                <a href="{% url 'seller_dashboard' %}" class="btn-primary btn mt-20">Open Your Dream Shop!</a>
+                            </div>
+                        </a>
+                    </div>
+                 
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <div class="offcanvas offcanvas-top offcanvas-search-area" tabindex="-1" id="offcanvas-search">
+        <div class="offcanvas-search-wrap">
+            <div class="offcanvas-search-header">
+                <div class="offcanvas-search-title">
+                    <span class="visually-hidden">Search</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-search-body">
+                <div class="offcanvas-search-box">
+                    <form action="{% url 'products_by_category' 'all' %}" method="GET" class="offcanvas-search-form">
+                        <input type="text" name="q" placeholder="Search..." class="offcanvas-search-input" required>
+                        <button type="submit" class="offcanvas-search-submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <div class="offcanvas-search-content">
+                        <div class="offcanvas-search-keywords-list">
+                            <p class="offcanvas-search-key-title">Popular searches :</p>
+                            <ul class="offcanvas-search-popular d-flex gap-1">
+                                <li><a href="{% url 'products_by_category' 'accessories' %}" class="btn btn-xs btn-gray btn-rounde-2">accessories</a></li>
+                                <li><a href="{% url 'products_by_category' 'clothing' %}" class="btn btn-xs btn-gray btn-rounde-2">clothing</a></li>
+                                <li><a href="{% url 'products_by_category' 'arts' %}" class="btn btn-xs btn-gray btn-rounde-2">arts</a></li>
+                                <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="btn btn-xs btn-gray btn-rounde-2">handicrafts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Notification</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessageText">You are not registered as a seller. Please register as a seller to access the seller dashboard.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area" style="background-color: #fff; color: #333; text-align: center; padding: 20px;">
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="contact-us">
+                    <a href="{% url 'contact-us' %}" class="widget--menu-link btn btn-link " style="color: #333; font-size: 1.5em; text-decoration: none; ">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% if show_seller_registration_error %}
+                var messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
+                messageModal.show();
+            {% endif %}
+        });
+    </script>
+    
+
+    
+</body>
+
+</html>

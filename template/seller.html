@@ -1,0 +1,361 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <title>Sell with us</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />  
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQmPoS5Y32ZyV5xUnK3fSA4VVDoAw5mXIkGkqckjvuzHC5zMQ5GIyAnkA" crossorigin="anonymous">
+
+
+    
+
+    <link href="{% static 'acss/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'acss/style.css' %}" rel="stylesheet">
+    <script>
+        $(document).ready(function() {
+            $('.status-select').change(function() {
+                $(this).closest('form').submit(); 
+            });
+        });
+    </script>
+
+    <style>
+        .table th, .table td {
+            vertical-align: middle; 
+            font-size: 1.1rem; 
+        }
+    
+        .table th {
+            font-weight: bold;
+        }
+    
+        .table tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.1); 
+        }
+    </style>
+    
+</head>
+
+
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <div id="popupMessage" class="popup-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000; border-radius: 8px;">
+            <p>Your product has been added successfully and is awaiting admin approval.</p>
+            <button id="closePopup" style="margin-top: 10px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+        </div>
+
+        <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="{% url 'index' %}" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+        
+                <a href="{% url 'index' %}" class="navbar-brand mx-4 mb-3 d-none d-lg-block">
+                    <h6 class="text-primary"><i class="fa fa-hashtag me-2"></i>HANDMADE GIFTS</h6>
+                </a>
+        
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="navbar-nav w-100">
+                        <div class="nav-item dropdown position-relative">
+                            <a href="{% url 'seller' %}" class="nav-link dropdown-toggle {% if active_nav == 'admin' %}active{% endif %}" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user-tie me-2" style="font-size: 1.2em;"></i>
+                                <span class="d-inline-flex align-items-center">
+                                    Seller
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom mt-2">
+                                <a href="{% url 'profile' %}" class="dropdown-item {% if active_nav == 'profile' %}active{% endif %}">My Profile</a>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
+                                {% endif %}
+                            </div>
+                        </div>&nbsp;
+                        <a href="{% url 'admin_dashboard' %}" class="nav-item nav-link {% if active_nav == 'products' %}active{% endif %}">
+                            <i class="fa fa-clipboard-list me-2"></i>Products
+                        </a>&nbsp;
+                        <a href="{% url 'seller_dashboard' %}?tab=orders" class="nav-item nav-link {% if active_nav == 'orders' %}active{% endif %}">
+                            <i class="fa fa-box me-2"></i>Orders
+                        </a>
+                        &nbsp;
+                        <a href="{% url 'seller_dashboard' %}?tab=revenues" class="nav-link {% if active_nav == 'revenues' %}active{% endif %}">
+                            <i class="fa fa-dollar-sign me-2"></i>Revenue
+                        </a>&nbsp;
+    
+                    </div>
+                </div>
+               
+                
+            </nav>
+        </div>
+       
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row vh-100 bg-light rounded align-items-center justify-content-center">
+                    <div class="col-md-12 text-center" style="margin-top: 20px;">
+                        {% if active_nav == 'revenues' %}
+                      
+                        <div class="container my-4" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #444;">
+                            <h2 class="text-center mb-4" style="font-size: 2.2rem; font-weight: 600;">Your Revenue</h2>
+                            <p class="text-center h5" style="color: #007bff;">
+                                Total Earnings: <span style="font-weight: bold; font-size: 1.5rem;">₹ {{ total_seller_earnings|floatformat:2|intcomma }}</span>
+                            </p>
+                        
+                            <h3 class="mt-5 mb-4" style="font-size: 1.75rem; font-weight: 500;">Revenue Details</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" style="border-radius: 0.5rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="background-color: #f8f9fa;">Order Item</th>
+                                            <th style="background-color: #f8f9fa;">Your Earnings</th>
+                                            <th style="background-color: #f8f9fa;">Admin Earnings</th>
+                                            <th style="background-color: #f8f9fa;">Created At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for revenue in revenues %}
+                                            <tr>
+                                                <td>{{ revenue.order_item.quantity }} of {{ revenue.order_item.product.name }}</td>
+                                                <td class="text-success" style="font-weight: bold;">₹{{ revenue.seller_earning|floatformat:2|intcomma }}</td>
+                                                <td class="text-danger" style="font-weight: bold;">₹{{ revenue.admin_earning|floatformat:2|intcomma }}</td>
+                                                <td>{{ revenue.created_at|date:"F j, Y, g:i A" }}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td colspan="4" class="text-center">No revenue records found.</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        {% elif active_nav == 'profile' %}
+                            <div class="profile-section mb-4" style="margin-bottom: 20px;">
+                                <div class="card" style="border-radius: 0.5rem; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                                    <div class="card-header bg-primary text-white" style="border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+                                        <h3>Seller Profile</h3>
+                                    </div>
+                                    <div class="card-body" style="font-size: 16px;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Last Login:</strong> <span class="text-muted">{{ last_login|date:"F j, Y, g:i a" }}</span></p>
+                                                <p><strong>Username:</strong> <span class="text-muted">{{ username }}</span></p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Email Address:</strong> <span class="text-muted">{{ email }}</span></p>
+                                                <p><strong>Date Joined:</strong> <span class="text-muted">{{ date_joined|date:"F j, Y" }}</span></p>
+                                            </div>
+                                        </div>
+                                        <p><strong>User Type:</strong> <span class="badge bg-primary rounded-pill" ">{{ user_type }}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% elif active_nav == 'products' %}
+                            
+                            
+                            <h3>Product Management</h3>
+                            <a href="{% url 'product_list' %}" class="btn btn-primary">Add Product</a>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Front Image</th>
+                                        <th>Back Image</th>
+                                        <th>Approval Status</th>
+
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in products %}
+                                    <tr>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.category }}</td>
+                                        <td>{{ product.description }}</td>
+                                        <td>{{ product.price|floatformat:0  }}</td>
+                                        <td>{{ product.stock }}</td>
+                                        <td>
+                                            {% if product.image_front %}
+                                                <img src="{{ product.image_front.url }}" alt="{{ product.name }} - Front" style="max-width: 100px; max-height: 100px;">
+                                            {% else %}
+                                                No front image
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if product.image_back %}
+                                                <img src="{{ product.image_back.url }}" alt="{{ product.name }} - Back" style="max-width: 100px; max-height: 100px;">
+                                            {% else %}
+                                                No back image
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if product.is_approved %}
+                                                <span class="badge bg-success">Approved</span>
+                                            {% else %}
+                                                <span class="badge bg-warning">Pending Approval</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'product_edit' product.pk %}" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a>
+                                            <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% elif active_nav == 'orders' %}
+                            <h4>Order Management</h4>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Total Amount</th>
+                                        <th>Order Items</th>
+                                        <th>Update Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if orders_with_totals %}
+
+                                    {% for order_with_total in orders_with_totals %}
+                                    <tr>
+                                        <td>{{ order_with_total.order.id }}</td>
+                                        
+                                        <td>{{ order_with_total.order.user.username }}</td>
+                                        <td>₹ {{ order_with_total.total_amount|floatformat:0 }}</td>
+                                        
+                                        <td>
+                                            
+                                                {% for item in order_with_total.order_items %}
+                                                
+                                                    <div>Product: {{ item.product_name }}</div>
+                                                    <div>Quantity: {{ item.quantity }}</div>
+                                                    <div>Price: ₹ {{ item.price|floatformat:0  }}</div>
+                                                    <div>Status: 
+                                                        <span class="badge bg-{{ item.status|lower }}" style="color: chocolate;">
+                                                            {{ item.status }}
+                                                        </span>
+                                                    </div>
+                                                
+                                                {% endfor %}
+                                            
+                                        </td>
+                                        
+                                        <td>
+                                            {% for item in order_with_total.order_items %}
+                                                {% if item.id %}
+                                                <form method="POST" action="{% url 'update_order_status' item.id %}?tab=orders">
+                                                    {% csrf_token %}
+                                                    <select name="status_{{ item.id }}" class="form-control" onchange="this.form.submit();">
+                                                        <option value="pending" {% if item.status == 'pending' %}selected{% endif %}>Pending</option>
+                                                        <option value="shipped" {% if item.status == 'shipped' %}selected{% endif %}>Shipped</option>
+                                                        <option value="delivered" {% if item.status == 'delivered' %}selected{% endif %}>Delivered</option>
+                                                        <option value="canceled" {% if item.status == 'canceled' %}selected{% endif %}>Canceled</option>
+                                                    </select>
+                                                </form>
+                                                
+                                                {% else %}
+                                                <p>Error: Item ID not found.</p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center"><strong>No orders found</strong></td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            
+                            
+                            
+                        
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <a href="{% url 'seller' %}" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="{% static 'ajs/main.js' %}"></script>
+    <script>
+        setTimeout(function() {
+            var alertElement = document.querySelector('.alert');
+            if (alertElement) {
+                alertElement.style.transition = 'opacity 0.5s ease';
+                alertElement.style.opacity = '0';
+                setTimeout(function() {
+                    alertElement.remove();
+                }, 400); 
+            }
+        }, 5000); 
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const popupMessage = document.getElementById("popupMessage");
+            const popupOverlay = document.getElementById("popupOverlay");
+            const closePopup = document.getElementById("closePopup");
+    
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('product_added') === 'true') {
+                popupMessage.style.display = "block";
+                popupOverlay.style.display = "block";
+            }
+    
+            closePopup.addEventListener("click", function () {
+                popupMessage.style.display = "none";
+                popupOverlay.style.display = "none";
+            });
+    
+            popupOverlay.addEventListener("click", function () {
+                popupMessage.style.display = "none";
+                popupOverlay.style.display = "none";
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

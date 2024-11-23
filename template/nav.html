@@ -1,0 +1,88 @@
+{% load static %}
+<style>
+    
+    .hintT-bottom:before {
+            content: attr(data-hint);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000; 
+            color: #fff; 
+            padding: 3px 6px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 12px;
+            opacity: 0; 
+            visibility: hidden;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+
+        .hintT-bottom:hover:before {
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .menu-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .menu-link:hover {
+            color: #fff; 
+        }
+        
+</style>
+<nav class="nav-main-menu d-none d-lg-block">
+    <ul class="main-menu">
+            <a href="{% url 'index' %}" class="main-menu-link">Home</a>
+        <li class="main-menu-item has-children--mega">
+            <a href="{% url 'products_by_category' 'all' %}"class="main-menu-link">Shop</a>
+            <div class="megamenu megamenu--mega">
+                <ul class="megamenu--mega-inner">
+                    <li class="megamenu-item">
+                        <h6 class="megamenu-title">Categories</h6>
+                        <ul>
+                            <li><a href="{% url 'products_by_category' 'accessories' %}" class="megamenu-link">Accessories</a></li>
+                            <li><a href="{% url 'products_by_category' 'clothing' %}" class="megamenu-link">Clothing</a></li>
+                            <li><a href="{% url 'products_by_category' 'arts' %}" class="megamenu-link">Arts</a></li>
+                            <li><a href="{% url 'products_by_category' 'handicrafts' %}" class="megamenu-link">Handicrafts</a></li>
+                            <li><a href="{% url 'products_by_category' 'all' %}" class="megamenu-link">All</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="megamenu-item">
+                        <a href="{% url 'products_by_category' 'arts' %}">
+                            <img src="{% static 'images/banners/art.jpg' %}" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="main-menu ">
+            <a href="{% url 'about-us' %}" class="main-menu-link">About Us</a>
+            
+        </li>
+        <li class="main-menu-item ">
+            {% if user.is_authenticated %}
+
+            <li class="main-menu-link">
+                <div class="menu-item hintT-bottom" data-hint="My Account">
+                    <a href="{% url 'my-account' %}" class="menu-link">
+                        <svg class="icon sell-with-us-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-10 1.67-10 5v2h20v-2c0-3.33-6.69-5-10-5z"/>
+                        </svg>
+                    </a>
+                </div>
+            </li>
+            {% endif %}
+
+
+            
+        </li>
+       
+    </ul>
+</nav>

@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            background-color: #f2f2f2; 
+        }
+        .payment-wrapper {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); 
+            margin-top: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            color: #333; 
+        }
+        p {
+            color: #555;
+        }
+        .btn-pay {
+            background-color: #F37254;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-pay:hover {
+            background-color: #d25a3a; 
+        }
+        .btn-back {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            color: #d98f5f;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            color: #0056b3; 
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+        footer a {
+            color:#d98f5f;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <section class="deal-offer-section position-relative section-space-ptb bg-deal-section-01" >
+
+    
+
+        <div class="container payment-wrapper">
+            <h2 class="text-center">Complete Your Payment</h2>
+            <p class="text-center mb-4">Please proceed with your payment of <strong>₹ {{ amount|floatformat:0 }}</strong></p>
+
+            <form id="razorpay-form" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="order_id" value="{{ order_id }}">
+                <input type="hidden" name="amount" value="{{ amount }}">
+            </form>
+
+            <form action="{% url 'payment_success' %}" method="POST" class="text-center ">
+                {% csrf_token %}
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="{{ razorpay_merchant_key }}"
+                    data-amount="{{ amount }}"
+                    data-currency="{{ currency }}"
+                    data-order_id="{{ razorpay_order_id }}"
+                    data-btn-primary btn-lg mt-20="Pay Now"
+                    data-name="HANMADE GIFTS"
+                    data-description="Complete your order"
+                    data-image="https://example.com/your_logo.jpg"
+                    data-prefill.name="{{ request.user.get_full_name }}"
+                    data-prefill.email="{{ request.user.email }}"
+                    data-theme.color="#F37254"
+                ></script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+            </form>
+
+            <div class="text-center">
+                <a href="{% url 'products_by_category' 'all' %}" class="btn-back">← Back to Shopping</a>
+            </div>
+        </div>
+    </section>
+        <footer>
+            <p>Need help? <a href="{% url 'contact-us' %}">Contact Us</a> </p>
+        </footer>
+
+    <script src="{% static 'js/modernizr-3.11.7.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
